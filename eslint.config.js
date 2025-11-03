@@ -1,3 +1,4 @@
+// eslint.config.js
 const js = require("@eslint/js");
 const globals = require("globals");
 
@@ -10,7 +11,8 @@ module.exports = [
       globals: {
         ...globals.node,
         ...globals.browser,
-        __ENV: "readonly",
+        ...globals.jest,   // ✅ tambahkan ini biar beforeEach, test, expect dikenali
+        __ENV: "readonly", // ✅ biar tidak error di script k6
       },
     },
     rules: {
