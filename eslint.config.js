@@ -1,7 +1,7 @@
-import js from "@eslint/js";
-import globals from "globals";
+const js = require("@eslint/js");
+const globals = require("globals");
 
-export default [
+module.exports = [
   js.configs.recommended,
   {
     languageOptions: {
@@ -10,13 +10,13 @@ export default [
       globals: {
         ...globals.node,
         ...globals.browser,
-        __ENV: "readonly", // 
+        __ENV: "readonly",
       },
     },
     rules: {
       "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-console": "off",
-      "eqeqeq": ["error", "always"],
+      eqeqeq: ["error", "always"],
     },
   },
 ];
