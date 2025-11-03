@@ -1,24 +1,22 @@
-const { FlatCompat } = require('@eslint/eslintrc');
-const js = require('@eslint/js');
+import js from "@eslint/js";
+import globals from "globals";
 
-// Initialize with the necessary configurations
-const compat = new FlatCompat({
-  recommendedConfig: js.configs.recommended,
-  eslintrc: true
-});
-
-module.exports = [
+export default [
   js.configs.recommended,
-  ...compat.config({
-    env: { 
-      es2021: true, 
-      node: true, 
-      jest: true 
+  {
+    languageOptions: {
+      ecmaVersion: "latest",
+      sourceType: "module",
+      globals: {
+        ...globals.node,
+        ...globals.browser,
+        __ENV: "readonly", // 
+      },
     },
     rules: {
-      "no-unused-vars": ["warn", { "argsIgnorePattern": "^_" }],
+      "no-unused-vars": ["warn", { argsIgnorePattern: "^_" }],
       "no-console": "off",
-      "eqeqeq": ["error", "always"]
-    }
-  })
+      "eqeqeq": ["error", "always"],
+    },
+  },
 ];
